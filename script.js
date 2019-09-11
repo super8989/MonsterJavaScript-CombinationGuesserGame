@@ -1,26 +1,37 @@
 const gameArea = document.querySelector(".game");
 const button = document.querySelector("button");
+const message = document.querySelector(".message");
 
+let score = 0;
 let gamePlay = false;
 
 button.addEventListener("click", function() {
     if (!gamePlay) {
         gamePlay = true;
+        score = 0;
         maker();
         button.innerHTML = 'Check combo';
     } else {
         console.log('checker');
+        score++;
+        message.innerHTML = "Guesses " + score;
         const numbers = document.querySelectorAll(".numb");
-        console.log(numbers);
+        let winCondition = 0;
 
         for (let i = 0; i < numbers.length; i++) {
-            console.log(numbers[i].value);
-            console.log(numbers[i].correct);
-
             if (numbers[i].value == numbers[i].correct) {
-                console.log("Match");    
+                numbers[i].style.backgroundColor = "green";
+                numbers[i].style.color = "white";
+                console.log("Match");
+                winCondition++;    
             } else {
+                let color = (numbers[i].value < numbers[i].correct) ? "blue" : "red";
+                numbers[i].style.backgroundColor = color;
+                numbers[i].style.color = "black";
                 console.log("No Match");
+            }
+            if (winCondition == numbers.length) {
+                console.log("Game Over");
             }
         }
     }
