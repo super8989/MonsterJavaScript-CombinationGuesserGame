@@ -24,7 +24,9 @@ function maker() {
         el.size = 1;
         el.style.width = "50px";
         el.classList.add("numb");
-        el.value = 0;    
+        
+        el.correct = Math.floor(Math.random() * 10);
+        el.value = el.correct;
         console.log(el);
         gameArea.appendChild(el);
     }
