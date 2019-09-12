@@ -9,7 +9,9 @@ button.addEventListener("click", function() {
     if (!gamePlay) {
         gamePlay = true;
         score = 0;
+        gameArea.innerHTML = "";
         maker();
+        message.innerHTML = "Guess the combo";
         button.innerHTML = 'Check combo';
     } else {
         console.log('checker');
@@ -31,11 +33,18 @@ button.addEventListener("click", function() {
                 console.log("No Match");
             }
             if (winCondition == numbers.length) {
-                console.log("Game Over");
+                gameEND();
             }
         }
     }
 })
+
+
+function gameEND() {
+    message.innerHTML = "You solved the combo in " + score + " guesses";
+    gamePlay = false;
+    button.innerHTML = "Restart Game";
+}
 
 
 function maker() {
@@ -50,7 +59,7 @@ function maker() {
         el.classList.add("numb");
         
         el.correct = Math.floor(Math.random() * 10);
-        el.value = el.correct;
+        el.value = 0;
         console.log(el);
         gameArea.appendChild(el);
     }
